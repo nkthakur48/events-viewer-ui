@@ -1,0 +1,23 @@
+.sidenav-container {
+  min-width: 200px;
+  ul {
+    list-style: none;
+    background-color: #ecf0f1;
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
+    height: 50vh;
+    li {
+      padding: 0.2em;
+      border: 1px solid #e0e0e0;
+      cursor: pointer;
+      &.active {
+        pointer-events: none;
+        background-color: #90a4ae;
+      }
+    }
+    li:hover {
+      background-color: #90a4ae;
+    }
+  }
+}

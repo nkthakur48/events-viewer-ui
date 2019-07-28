@@ -1,0 +1,27 @@
+.event-tabs-holder {
+  display: flex;
+  margin-top: 1em;
+  .tab {
+    display: flex;
+    align-items: center;
+    padding: 0.5em;
+    background-color: white;
+    border: 1px solid grey;
+    cursor: pointer;
+    &.active {
+      border-bottom: none;
+      cursor: default;
+    }
+    .event-type {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .close-btn {
+      white-space: nowrap;
+      padding: 0.1em;
+      color: red;
+    }
+  }
+}

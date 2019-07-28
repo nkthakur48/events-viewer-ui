@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.scss";
+import SideNav from "./components/SideNav/SideNav";
+import Tabs from "./components/Tabs/Tabs";
+import EventTable from "./components/EventTable/EventTable";
+import { events } from "./constants";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    active_tab: "",
+    opened_tabs: []
+  };
+  sideNavClicked = event => {
+    const eventId = event.target.dataset.event;
+    this.setState({ active_tab: eventId });
+    this.setState(prevState => {
+      const openedTabs = [...prevState.opened_tabs, eventId];
+      return { opened_tabs: openedTabs };
+    });
+  };
+  render() {
+    return (
+      <div className="App">
+        <div className="events-left-pane">
+          <h3 className="events-viwer-title">Events Viewer</h3>
+          <SideNav
+            events={events}
+            click={this.sideNavClicked}
+            activeTabs={this.state.opened_tabs}
+          />
+          <nav />
+        </div>
+        <div className="events-right-pane">
+          <Tabs
+            openedTabs={this.state.opened_tabs}
+            activeTab={this.state.active_tab}
+          />
+          <EventTable events={events[this.state.active_tab]} />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
