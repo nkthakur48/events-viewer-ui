@@ -2,13 +2,17 @@ import React from "react";
 import "./Tabs.scss";
 import { events_name } from "../../constants";
 
-const Tabs = ({ openedTabs, activeTab }) => {
+const Tabs = ({ openedTabs, activeTab, viewHandler, closeHandler }) => {
   const getTab = tab => {
     const tabClass = activeTab === tab ? "tab active" : "tab";
     return (
-      <div className={tabClass} key={tab}>
-        <div className="event-type">{events_name[tab]}</div>
-        <div className="close-btn">X</div>
+      <div className={tabClass} key={tab} data-event-type={tab}>
+        <div className="event-type" onClick={viewHandler}>
+          {events_name[tab]}
+        </div>
+        <div className="close-btn" onClick={closeHandler}>
+          x
+        </div>
       </div>
     );
   };

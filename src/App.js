@@ -18,6 +18,18 @@ class App extends Component {
       return { opened_tabs: openedTabs };
     });
   };
+  tabViewHandler = event => {
+    const eventId = event.target.closest(".tab").dataset.eventType;
+    this.setState({ active_tab: eventId });
+  };
+  tabCloseHandler = event => {
+    const eventId = event.target.closest(".tab").dataset.eventType;
+    this.setState(prevState => {
+      const openedTabs =
+        prevState.opened_tabs.filter(tab => tab !== eventId) || [];
+      return { opened_tabs: openedTabs };
+    });
+  };
   render() {
     return (
       <div className="App">
@@ -34,8 +46,16 @@ class App extends Component {
           <Tabs
             openedTabs={this.state.opened_tabs}
             activeTab={this.state.active_tab}
+            viewHandler={this.tabViewHandler}
+            closeHandler={this.tabCloseHandler}
           />
-          <EventTable events={events[this.state.active_tab]} />
+          {this.state.active_tab ? (
+            <EventTable events={events[this.state.active_tab]} />
+          ) : (
+            <h3 style={{ textAlign: "center" }}>
+              Select an Event Type to continue
+            </h3>
+          )}
         </div>
       </div>
     );

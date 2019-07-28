@@ -20,8 +20,13 @@
     }
     .close-btn {
       white-space: nowrap;
+      cursor: pointer;
       padding: 0.1em;
-      color: red;
+      margin-left: 0.1em;
+      background-color: #f44336;
+      color: #ffffff;
+      border: 1px solid #f44336;
+      border-radius: 50%;
     }
   }
 }
